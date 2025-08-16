@@ -1,0 +1,212 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ai-infra-deployer"
+version = "0.1.0"
+description = "AI-powered infrastructure deployment platform"
+authors = [{name = "AI Infrastructure Team", email = "team@ai-infra.com"}]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    # FastAPI and web framework
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    
+    # LLM and AI
+    "langchain>=0.1.0",
+    "langchain-openai>=0.0.5",
+    "langchain-anthropic>=0.1.0",
+    "langchain-community>=0.0.10",
+    "openai>=1.6.0",
+    "anthropic>=0.8.0",
+    
+    # Infrastructure and deployment
+    "temporal-python-sdk>=1.0.15",
+    "proxmoxer>=2.0.1",
+    "python-gitlab>=4.2.0",
+    "kubernetes>=28.1.0",
+    "docker>=7.0.0",
+    
+    # Database and storage
+    "sqlalchemy>=2.0.23",
+    "alembic>=1.13.1",
+    "asyncpg>=0.29.0",
+    "redis>=5.0.1",
+    "psycopg2-binary>=2.9.9",
+    
+    # Templates and configuration
+    "jinja2>=3.1.2",
+    "pyyaml>=6.0.1",
+    "toml>=0.10.2",
+    "jsonschema>=4.20.0",
+    
+    # HTTP and API clients
+    "httpx>=0.25.2",
+    "aiohttp>=3.9.1",
+    "requests>=2.31.0",
+    
+    # Utilities
+    "click>=8.1.7",
+    "rich>=13.7.0",
+    "typer>=0.9.0",
+    "python-multipart>=0.0.6",
+    "python-jose[cryptography]>=3.3.0",
+    "passlib[bcrypt]>=1.7.4",
+    
+    # Monitoring and observability
+    "prometheus-client>=0.19.0",
+    "structlog>=23.2.0",
+    "python-json-logger>=2.0.7",
+    
+    # Vector database and embeddings
+    "chromadb>=0.4.18",
+    "qdrant-client>=1.7.0",
+    "sentence-transformers>=2.2.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.3",
+    "pytest-asyncio>=0.21.1",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+    "black>=23.11.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "mypy>=1.7.1",
+    "pre-commit>=3.6.0",
+]
+
+test = [
+    "pytest>=7.4.3",
+    "pytest-asyncio>=0.21.1",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+    "httpx>=0.25.2",
+    "factory-boy>=3.3.0",
+]
+
+docs = [
+    "mkdocs>=1.5.3",
+    "mkdocs-material>=9.4.8",
+    "mkdocstrings[python]>=0.24.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/ai-infra/deployer"
+Documentation = "https://ai-infra-deployer.readthedocs.io"
+Repository = "https://github.com/ai-infra/deployer"
+"Bug Tracker" = "https://github.com/ai-infra/deployer/issues"
+
+[project.scripts]
+aid = "cli.main:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["backend*", "cli*", "sdk*"]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["backend", "cli", "sdk"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "proxmoxer.*",
+    "temporal.*",
+    "gitlab.*",
+    "kubernetes.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=backend",
+    "--cov=cli",
+    "--cov-report=html",
+    "--cov-report=term-missing",
+    "--cov-fail-under=80",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests",
+    "e2e: End-to-end tests",
+    "slow: Slow running tests",
+]
+
+[tool.coverage.run]
+source = ["backend", "cli"]
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*",
+    "*/migrations/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
