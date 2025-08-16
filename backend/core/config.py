@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     """Application settings."""
     
     # Application
-    app_name: str = Field("AI Infrastructure Deployer", env="APP_NAME")
+    app_name: str = Field("LumaEngine", env="APP_NAME")
     app_version: str = Field("0.1.0", env="APP_VERSION")
     debug: bool = Field(False, env="DEBUG")
     environment: str = Field("development", env="ENVIRONMENT")

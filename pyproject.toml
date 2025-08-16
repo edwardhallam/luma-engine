@@ -3,10 +3,10 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ai-infra-deployer"
-version = "0.1.0"
-description = "AI-powered infrastructure deployment platform"
-authors = [{name = "AI Infrastructure Team", email = "team@ai-infra.com"}]
+name = "luma-engine"
+version = "1.0.0"
+description = "Next-generation AI-powered infrastructure orchestration platform"
+authors = [{name = "LumaEngine Team", email = "team@lumaengine.dev"}]
 license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.11"
@@ -107,13 +107,13 @@ docs = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ai-infra/deployer"
-Documentation = "https://ai-infra-deployer.readthedocs.io"
-Repository = "https://github.com/ai-infra/deployer"
-"Bug Tracker" = "https://github.com/ai-infra/deployer/issues"
+Homepage = "https://github.com/your-username/luma-engine"
+Documentation = "https://luma-engine.readthedocs.io"
+Repository = "https://github.com/your-username/luma-engine"
+"Bug Tracker" = "https://github.com/your-username/luma-engine/issues"
 
 [project.scripts]
-aid = "cli.main:app"
+luma = "cli.main:app"
 
 [tool.setuptools.packages.find]
 where = ["."]

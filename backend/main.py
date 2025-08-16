@@ -1,4 +1,4 @@
-"""Main FastAPI application for AI Infrastructure Deployer."""
+"""Main FastAPI application for LumaEngine."""
 
 from contextlib import asynccontextmanager
 from typing import Dict, Any
@@ -135,7 +135,7 @@ async def cleanup_clients():
 # Create FastAPI application
 app = FastAPI(
     title=settings.app_name,
-    description="AI-powered infrastructure deployment platform",
+    description="Next-generation AI-powered infrastructure orchestration platform",
     version=settings.app_version,
     debug=settings.debug,
     lifespan=lifespan,
