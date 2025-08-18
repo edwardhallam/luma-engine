@@ -210,7 +210,7 @@ pytest tests/e2e/          # End-to-end tests
 ```
 
 ### **Contributing**
-We welcome contributions! Please see our [Contributing Guide](./CONTRIBUTING.md) for details on:
+We welcome contributions! Please see our [Development Guide](./DEVELOPMENT_GUIDE.md) for details on:
 - Development setup
 - Code style and standards
 - Pull request process
@@ -275,7 +275,6 @@ Comprehensive monitoring included:
 
 ## 🤝 **Community**
 
-- **Documentation**: [docs.lumaengine.dev](https://docs.lumaengine.dev)
 - **GitHub Discussions**: Share ideas and get help
 - **Issue Tracker**: Bug reports and feature requests
 - **Slack Community**: Real-time discussions (coming soon)

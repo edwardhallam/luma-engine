@@ -1,4 +1,4 @@
-# Getting Started with AI Infrastructure Deployer
+# Getting Started with LumaEngine
 
 ## Quick Start
 
@@ -11,8 +11,8 @@
 ### 1. Clone and Setup
 
 ```bash
-git clone <repository-url>
-cd ai-infra-deployer
+git clone https://github.com/edwardhallam/luma-engine.git
+cd luma-engine
 make setup
 ```
 
@@ -103,7 +103,7 @@ The development environment includes:
 ## Project Structure
 
 ```
-ai-infra-deployer/
+luma-engine/
 ├── backend/                 # FastAPI application
 │   ├── api/                # API endpoints
 │   ├── core/               # Core business logic
