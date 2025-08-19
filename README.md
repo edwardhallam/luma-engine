@@ -9,6 +9,8 @@
 
 LumaEngine transforms natural language into production-ready infrastructure deployments using advanced Large Language Models and GitOps automation. Designed for modern cloud-native environments.
 
+📋 **[View Development Roadmap →](https://github.com/users/edwardhallam/projects/1)**
+
 ## 🚀 **Overview**
 
 LumaEngine bridges the gap between infrastructure requirements and deployment reality. Simply describe your infrastructure needs in plain English, and LumaEngine intelligently provisions, configures, and maintains your cloud resources.
