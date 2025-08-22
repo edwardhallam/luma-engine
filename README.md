@@ -9,7 +9,6 @@
 
 LumaEngine democratizes infrastructure automation by transforming natural language requirements into production-ready deployments through conversational AI. Purpose-built for homelab enthusiasts and small-to-medium businesses, eliminating the complexity barrier of traditional enterprise infrastructure tools.
 
-📋 **[View Development Roadmap →](https://github.com/users/edwardhallam/projects/1)**
 
 ## 🚀 **Overview**
 
@@ -48,7 +47,6 @@ LumaEngine bridges the gap between infrastructure requirements and deployment re
 - **LLM Providers**: OpenAI, Anthropic, Ollama, llama.cpp, vLLM for local inference
 - **Homelab Platforms**: Proxmox VE, TrueNAS, Home Assistant, Unraid, Docker Swarm
 - **SMB Cloud**: DigitalOcean, Linode, Vultr, Hetzner (cost-effective providers)
-- **Enterprise Cloud**: AWS, GCP, Azure for hybrid scenarios
 
 ### **Production-Grade Infrastructure**
 - **Infrastructure as Code**: OpenTofu/Terraform generation
@@ -160,37 +158,6 @@ luma-engine/
 └── docs/                   # Technical documentation
 ```
 
-## 📊 **Development Roadmap**
-
-### **Phase 1: Foundation** ✅ **Complete**
-- [x] FastAPI application with comprehensive REST APIs
-- [x] Multi-provider LLM integration framework
-- [x] Intelligent requirements analysis system
-- [x] Comprehensive data models and validation
-- [x] Docker Compose development environment
-
-### **Phase 2: Multi-Agent LLM System** 🚧 **In Progress**
-- [ ] Security specialist agent for hardening recommendations
-- [ ] Network agent for optimal homelab topology design
-- [ ] Database agent for storage and backup strategies
-- [ ] Validation agent for cost and resource optimization
-- [ ] Knowledge graph for infrastructure pattern learning
-- [ ] Multi-platform deployment support with Crossplane
-
-### **Phase 3: Homelab Integration** 📅 **Planned**
-- [ ] Proxmox VE native API integration
-- [ ] TrueNAS storage automation
-- [ ] Home Assistant IoT orchestration
-- [ ] Local LLM inference (Ollama, llama.cpp, vLLM)
-- [ ] Cost tracking and budget alerts for SMBs
-
-### **Phase 4: SMB & Enterprise Features** 📅 **Future**
-- [ ] Multi-tenant MSP management portal
-- [ ] Advanced security compliance (SOC2, GDPR)
-- [ ] Chaos engineering and reliability testing
-- [ ] Custom template marketplace
-- [ ] Plugin ecosystem for extensibility
-- [ ] Service mesh integration with observability-driven insights
 
 ## 🛠️ **Development**
 
