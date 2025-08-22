@@ -42,6 +42,13 @@ LumaEngine enables infrastructure automation by transforming natural language re
 ├── Rate limiting and spam protection
 └── Automated backups and monitoring
 
+🚀 Automated Deployment
+├── Generates Docker Compose configurations
+├── Creates nginx reverse proxy with SSL
+├── Sets up Matrix federation and room creation
+├── Configures Element web client branding
+└── Deploys to DigitalOcean droplet in 8 minutes
+
 💰 Cost Optimization
 ├── Resource sizing: 4 CPU cores, 8GB RAM
 ├── Monthly estimate: ~$25-40 (DigitalOcean/Linode)
