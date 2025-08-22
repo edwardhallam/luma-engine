@@ -9,7 +9,7 @@
 
 LumaEngine enables infrastructure automation by transforming natural language requirements into production-ready deployments through conversational AI. Purpose-built for homelab enthusiasts and small-to-medium businesses, eliminating the complexity barrier of traditional enterprise infrastructure tools. Simply describe your infrastructure needs in plain English, and LumaEngine intelligently provisions, configures, and maintains your self-hosted resources.
 
-### **Key Capabilities**
+### **Planned Key Capabilities**
 
 - **🏠 Homelab Focused**: Native support for Proxmox, DigitalOcean, local deployments and other various hosting solutions
 - **🧠 Multi-Agent AI System**: Specialist agents for security, networking, databases, and validation
@@ -22,14 +22,30 @@ LumaEngine enables infrastructure automation by transforming natural language re
 ### **AI-Powered Analysis**
 ```bash
 # Natural language input
-"Deploy a scalable chat application with PostgreSQL clustering for high availability"
+"I want to set up a chat app for my gaming community with about 100 users"
 
-# LumaEngine intelligently creates:
-✅ Load-balanced application servers with auto-scaling
-✅ High-availability PostgreSQL cluster with replication  
-✅ Comprehensive monitoring and alerting setup
-✅ Security hardening and network isolation
-✅ Automated backup and disaster recovery
+# LumaEngine's AI agents analyze and create:
+🧠 Requirements Analysis
+├── Identifies: Community chat platform (Discord alternative)
+├── Estimates: ~100 concurrent users, voice + text needed
+└── Recommends: Matrix/Element with voice bridges
+
+🏗️ Infrastructure Planning  
+├── Application: Matrix Synapse server + Element web client
+├── Database: PostgreSQL for Matrix data storage
+├── Voice: Jitsi Meet integration for voice channels
+└── Network: Reverse proxy with SSL certificates
+
+🔒 Security & Monitoring
+├── End-to-end encryption (Matrix native)
+├── Room moderation and user management
+├── Rate limiting and spam protection
+└── Automated backups and monitoring
+
+💰 Cost Optimization
+├── Resource sizing: 4 CPU cores, 8GB RAM
+├── Monthly estimate: ~$25-40 (DigitalOcean/Linode)
+└── Federation with other Matrix servers (optional)
 ```
 
 
