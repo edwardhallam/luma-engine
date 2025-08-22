@@ -100,7 +100,7 @@ graph TB
     
     %% External Systems
     L[LLM Providers<br/>OpenAI • Anthropic • Ollama]
-    M[Infrastructure Targets<br/>AWS • GCP • Proxmox • K8s]
+    M[Infrastructure Targets<br/>DigitalOcean • Proxmox • K8s]
     N[Observability<br/>Prometheus • Grafana • Jaeger]
     
     I --> L
