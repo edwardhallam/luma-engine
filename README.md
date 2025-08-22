@@ -5,23 +5,23 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
 [![Docker](https://img.shields.io/badge/Docker-ready-blue.svg)](https://www.docker.com/)
 
-**Next-generation AI-powered infrastructure orchestration platform**
+**AI Infrastructure Platform for Homelabs & SMBs**
 
-LumaEngine transforms natural language into production-ready infrastructure deployments using advanced Large Language Models and GitOps automation. Designed for modern cloud-native environments.
+LumaEngine democratizes infrastructure automation by transforming natural language requirements into production-ready deployments through conversational AI. Purpose-built for homelab enthusiasts and small-to-medium businesses, eliminating the complexity barrier of traditional enterprise infrastructure tools.
 
 📋 **[View Development Roadmap →](https://github.com/users/edwardhallam/projects/1)**
 
 ## 🚀 **Overview**
 
-LumaEngine bridges the gap between infrastructure requirements and deployment reality. Simply describe your infrastructure needs in plain English, and LumaEngine intelligently provisions, configures, and maintains your cloud resources.
+LumaEngine bridges the gap between infrastructure requirements and deployment reality for homelab and small business environments. Simply describe your infrastructure needs in plain English, and LumaEngine intelligently provisions, configures, and maintains your self-hosted resources.
 
 ### **Key Capabilities**
 
-- **🧠 Natural Language Processing**: Convert plain English requirements into detailed infrastructure specifications
-- **⚡ Intelligent Automation**: Generate production-ready Infrastructure as Code from specifications  
-- **🔄 GitOps Integration**: Automated deployment pipelines with continuous monitoring
-- **🛡️ Security First**: Built-in security best practices and compliance checks
-- **📊 Observability**: Comprehensive monitoring, logging, and alerting
+- **🧠 Multi-Agent AI System**: Specialist agents for security, networking, databases, and validation
+- **🏠 Homelab Focused**: Native support for Proxmox, TrueNAS, Home Assistant, and self-hosted solutions
+- **💰 Cost-Optimized**: Built for resource constraints with local LLM support and cost estimation
+- **🔐 Privacy-First**: Local model inference options to keep sensitive infrastructure data private
+- **📊 Infrastructure Intelligence**: Knowledge graph for pattern recognition and dependency analysis
 
 ## 🎯 **Core Features**
 
@@ -38,10 +38,17 @@ LumaEngine bridges the gap between infrastructure requirements and deployment re
 ✅ Automated backup and disaster recovery
 ```
 
+### **Target Users**
+- **🏠 Homelab Enthusiasts**: Self-hosted infrastructure, learning environments, personal projects
+- **🏢 Small Businesses**: 1-50 employees needing reliable, cost-effective infrastructure  
+- **🛠️ MSPs**: Managed service providers serving SMB clients with standardized deployments
+- **👩‍💻 Developers**: Rapid prototyping and development environment provisioning
+
 ### **Multi-Provider Support**
-- **LLM Providers**: OpenAI, Anthropic, Ollama with intelligent fallbacks
-- **Cloud Platforms**: Proxmox, AWS, GCP, Azure, Kubernetes
-- **GitOps Tools**: Self-hosted GitLab, ArgoCD, GitHub Actions
+- **LLM Providers**: OpenAI, Anthropic, Ollama, llama.cpp, vLLM for local inference
+- **Homelab Platforms**: Proxmox VE, TrueNAS, Home Assistant, Unraid, Docker Swarm
+- **SMB Cloud**: DigitalOcean, Linode, Vultr, Hetzner (cost-effective providers)
+- **Enterprise Cloud**: AWS, GCP, Azure for hybrid scenarios
 
 ### **Production-Grade Infrastructure**
 - **Infrastructure as Code**: OpenTofu/Terraform generation
@@ -58,17 +65,17 @@ graph TB
     C --> D[IaC Generation]
     D --> E[GitOps Repository]
     E --> F[Automated Deployment]
-    F --> G[Multi-Cloud Infrastructure]
+    F --> G[Homelab & SMB Infrastructure]
     G --> H[Continuous Monitoring]
 ```
 
 ### **Technology Stack**
-- **Backend**: FastAPI with async/await for high performance
-- **AI/ML**: LangChain with custom agents and tool integrations
-- **IaC**: OpenTofu + Terraform with multi-provider support
-- **GitOps**: Self-hosted GitLab + ArgoCD for deployment automation
-- **Orchestration**: Temporal for reliable workflow execution
-- **Observability**: Prometheus, Grafana, Loki for comprehensive monitoring
+- **Backend**: FastAPI with async/await, Pydantic v2 for data validation
+- **AI/ML**: Multi-agent LLM system with OpenAI, Anthropic, local models (Ollama, llama.cpp)
+- **Knowledge**: Neo4j graph database for infrastructure pattern recognition
+- **IaC**: OpenTofu/Terraform generation with Pulumi consideration for type safety
+- **Orchestration**: Temporal workflows for reliable deployment execution
+- **Observability**: OpenTelemetry, Prometheus, Grafana with cost tracking
 
 ## 🚀 **Quick Start**
 
@@ -76,6 +83,7 @@ graph TB
 - Python 3.11+
 - Docker and Docker Compose
 - LLM provider API key (OpenAI, Anthropic, or local Ollama)
+- Optional: Proxmox VE server, DigitalOcean/Linode account
 
 ### **Installation**
 ```bash
@@ -108,30 +116,30 @@ make run
 
 ## 💡 **Usage Examples**
 
-### **Enterprise Application Stack**
+### **Homelab Media Server Stack**
 ```bash
 curl -X POST "http://localhost:8000/api/v1/requirements/analyze" \
   -H "Content-Type: application/json" \
   -d '{
-    "user_request": "Deploy a microservices architecture with API gateway, service mesh, and observability",
+    "user_request": "Deploy Plex media server with Sonarr, Radarr, and Transmission on my Proxmox homelab",
     "context": {
-      "scale": "enterprise",
-      "availability": "99.9%",
-      "compliance": "SOC2"
+      "platform": "proxmox",
+      "storage": "NFS",
+      "vpn": "wireguard"
     }
   }'
 ```
 
-### **AI/ML Infrastructure**
+### **Small Business Web Application**
 ```bash
 curl -X POST "http://localhost:8000/api/v1/requirements/analyze" \
   -H "Content-Type: application/json" \
   -d '{
-    "user_request": "Set up GPU cluster for ML model training and inference",
+    "user_request": "Set up WordPress site with database and backup on DigitalOcean",
     "context": {
-      "workload": "deep-learning",
-      "gpu_type": "A100",
-      "auto_scaling": true
+      "platform": "digitalocean",
+      "domain": "mybusiness.com",
+      "ssl": "letsencrypt"
     }
   }'
 ```
@@ -161,26 +169,28 @@ luma-engine/
 - [x] Comprehensive data models and validation
 - [x] Docker Compose development environment
 
-### **Phase 2: IaC Generation Engine** 🚧 **In Progress**
-- [ ] Jinja2-based template rendering system
-- [ ] Dynamic OpenTofu configuration generation
-- [ ] GitLab repository automation
-- [ ] Template validation and optimization
-- [ ] Multi-platform deployment support
+### **Phase 2: Multi-Agent LLM System** 🚧 **In Progress**
+- [ ] Security specialist agent for hardening recommendations
+- [ ] Network agent for optimal homelab topology design
+- [ ] Database agent for storage and backup strategies
+- [ ] Validation agent for cost and resource optimization
+- [ ] Knowledge graph for infrastructure pattern learning
+- [ ] Multi-platform deployment support with Crossplane
 
-### **Phase 3: Workflow Orchestration** 📅 **Planned**
-- [ ] Temporal workflow implementation
-- [ ] Automated deployment pipelines
-- [ ] Intelligent error recovery and rollbacks
-- [ ] ArgoCD GitOps integration
-- [ ] Real-time deployment monitoring
+### **Phase 3: Homelab Integration** 📅 **Planned**
+- [ ] Proxmox VE native API integration
+- [ ] TrueNAS storage automation
+- [ ] Home Assistant IoT orchestration
+- [ ] Local LLM inference (Ollama, llama.cpp, vLLM)
+- [ ] Cost tracking and budget alerts for SMBs
 
-### **Phase 4: Advanced Features** 📅 **Future**
-- [ ] Service mesh integration (Istio/Linkerd)
-- [ ] Advanced security scanning and compliance
-- [ ] Cost optimization and recommendations
-- [ ] Multi-tenancy and role-based access
+### **Phase 4: SMB & Enterprise Features** 📅 **Future**
+- [ ] Multi-tenant MSP management portal
+- [ ] Advanced security compliance (SOC2, GDPR)
+- [ ] Chaos engineering and reliability testing
+- [ ] Custom template marketplace
 - [ ] Plugin ecosystem for extensibility
+- [ ] Service mesh integration with observability-driven insights
 
 ## 🛠️ **Development**
 
@@ -227,10 +237,15 @@ OPENAI_API_KEY=your_openai_key
 ANTHROPIC_API_KEY=your_anthropic_key
 LLM_PRIMARY_PROVIDER=openai
 
-# Infrastructure
+# Homelab Infrastructure
 PROXMOX_HOST=your_proxmox_host
 PROXMOX_USER=your_username
 PROXMOX_PASSWORD=your_password
+
+# SMB Cloud Providers
+DIGITALOCEAN_TOKEN=your_do_token
+LINODE_TOKEN=your_linode_token
+VULTR_API_KEY=your_vultr_key
 
 # Database
 DATABASE_URL=postgresql://user:pass@localhost/luma_db
