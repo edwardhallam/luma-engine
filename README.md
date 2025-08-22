@@ -7,17 +7,12 @@
 
 **AI Infrastructure Platform for Homelabs & SMBs**
 
-LumaEngine democratizes infrastructure automation by transforming natural language requirements into production-ready deployments through conversational AI. Purpose-built for homelab enthusiasts and small-to-medium businesses, eliminating the complexity barrier of traditional enterprise infrastructure tools.
-
-
-## 🚀 **Overview**
-
-LumaEngine bridges the gap between infrastructure requirements and deployment reality for homelab and small business environments. Simply describe your infrastructure needs in plain English, and LumaEngine intelligently provisions, configures, and maintains your self-hosted resources.
+LumaEngine enables infrastructure automation by transforming natural language requirements into production-ready deployments through conversational AI. Purpose-built for homelab enthusiasts and small-to-medium businesses, eliminating the complexity barrier of traditional enterprise infrastructure tools. Simply describe your infrastructure needs in plain English, and LumaEngine intelligently provisions, configures, and maintains your self-hosted resources.
 
 ### **Key Capabilities**
 
+- **🏠 Homelab Focused**: Native support for Proxmox, DigitalOcean, local deployments and other various hosting solutions
 - **🧠 Multi-Agent AI System**: Specialist agents for security, networking, databases, and validation
-- **🏠 Homelab Focused**: Native support for Proxmox, TrueNAS, Home Assistant, and self-hosted solutions
 - **💰 Cost-Optimized**: Built for resource constraints with local LLM support and cost estimation
 - **🔐 Privacy-First**: Local model inference options to keep sensitive infrastructure data private
 - **📊 Infrastructure Intelligence**: Knowledge graph for pattern recognition and dependency analysis
@@ -37,11 +32,6 @@ LumaEngine bridges the gap between infrastructure requirements and deployment re
 ✅ Automated backup and disaster recovery
 ```
 
-### **Target Users**
-- **🏠 Homelab Enthusiasts**: Self-hosted infrastructure, learning environments, personal projects
-- **🏢 Small Businesses**: 1-50 employees needing reliable, cost-effective infrastructure  
-- **🛠️ MSPs**: Managed service providers serving SMB clients with standardized deployments
-- **👩‍💻 Developers**: Rapid prototyping and development environment provisioning
 
 ### **Multi-Provider Support**
 - **LLM Providers**: OpenAI, Anthropic, Ollama, llama.cpp, vLLM for local inference
@@ -59,12 +49,11 @@ LumaEngine bridges the gap between infrastructure requirements and deployment re
 ```mermaid
 graph TB
     A[Natural Language Input] --> B[AI Analysis Engine]
-    B --> C[Infrastructure Specification]
+    B --> C[Input Specifications]
     C --> D[IaC Generation]
     D --> E[GitOps Repository]
     E --> F[Automated Deployment]
-    F --> G[Homelab & SMB Infrastructure]
-    G --> H[Continuous Monitoring]
+    F --> G[Continuous Monitoring]
 ```
 
 ### **Technology Stack**
@@ -83,7 +72,7 @@ graph TB
 - LLM provider API key (OpenAI, Anthropic, or local Ollama)
 - Optional: Proxmox VE server, DigitalOcean/Linode account
 
-### **Installation**
+### **Milestone 1 Installation Steps**
 ```bash
 git clone https://github.com/edwardhallam/luma-engine.git
 cd luma-engine
