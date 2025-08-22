@@ -48,215 +48,50 @@ LumaEngine enables infrastructure automation by transforming natural language re
 
 ```mermaid
 graph TB
-    %% User Interface Layer
-    subgraph "🎯 User Interface Layer"
-        UI[Web UI/Dashboard]
-        CLI[CLI Interface]
-        API_DOCS[API Documentation]
+    A[Natural Language Input] --> B[AI Analysis Engine]
+    B --> C[Infrastructure Specification]
+    C --> D[IaC Generation]
+    D --> E[GitOps Repository]
+    E --> F[Automated Deployment]
+    F --> G[Multi-Cloud Infrastructure]
+    G --> H[Continuous Monitoring]
+    
+    %% Core Components
+    subgraph "🧠 AI Engine"
+        B
+        I[Multi-Agent LLM System]
+        B --> I
     end
-
-    %% API Gateway Layer  
-    subgraph "🌐 API Gateway & Authentication"
-        LB[Load Balancer]
-        AUTH[Authentication/OAuth2]
-        RATE[Rate Limiting]
-        API_GW[API Gateway]
+    
+    subgraph "⚡ Generation Engine"
+        D
+        J[Template Manager]
+        D --> J
     end
-
-    %% Core Application Layer
-    subgraph "🧠 LumaEngine Core Services"
-        direction TB
-        subgraph "AI Processing Engine"
-            REQ_ANALYZER[Requirements Analyzer]
-            MULTI_AGENT[Multi-Agent LLM System]
-            SPEC_GEN[Specification Generator]
-        end
-        
-        subgraph "Infrastructure Engine"
-            IAC_GEN[IaC Generator]
-            TEMPLATE_MGR[Template Manager]
-            VALIDATOR[Configuration Validator]
-        end
-        
-        subgraph "Deployment Engine"
-            WORKFLOW_ENGINE[Temporal Workflows]
-            DEPLOY_MGR[Deployment Manager]
-            ROLLBACK_MGR[Rollback Manager]
-        end
+    
+    subgraph "🚀 Deployment Engine"
+        F
+        K[Workflow Orchestration]
+        F --> K
     end
-
-    %% Multi-Agent LLM Detail
-    subgraph "🤖 Multi-Agent LLM Specialists"
-        direction LR
-        SECURITY_AGENT[Security Agent]
-        NETWORK_AGENT[Network Agent] 
-        DB_AGENT[Database Agent]
-        K8S_AGENT[Kubernetes Agent]
-        COST_AGENT[Cost Optimization Agent]
-        VALIDATION_AGENT[Validation Agent]
-    end
-
-    %% Data & Knowledge Layer
-    subgraph "📊 Data & Knowledge Layer"
-        direction TB
-        POSTGRES[(PostgreSQL)]
-        REDIS[(Redis Cache)]
-        NEO4J[(Neo4j Knowledge Graph)]
-        KNOWLEDGE_BASE[Infrastructure Patterns]
-    end
-
-    %% External LLM Providers
-    subgraph "🌍 LLM Providers"
-        OPENAI[OpenAI GPT-4]
-        ANTHROPIC[Anthropic Claude]
-        OLLAMA[Ollama Local]
-        AZURE_AI[Azure OpenAI]
-    end
-
-    %% GitOps & Version Control
-    subgraph "📂 GitOps & Version Control"
-        GITLAB[GitLab Repository]
-        ARGOCD[ArgoCD]
-        GIT_HOOKS[Git Webhooks]
-        VERSION_CTRL[Version Control]
-    end
-
-    %% Infrastructure Targets
-    subgraph "☁️ Infrastructure Targets"
-        direction TB
-        subgraph "Cloud Providers"
-            AWS[Amazon AWS]
-            GCP[Google Cloud]
-            AZURE[Microsoft Azure]
-            DO[DigitalOcean]
-        end
-        
-        subgraph "On-Premise/Hybrid"
-            PROXMOX[Proxmox VE]
-            K8S[Kubernetes]
-            VMWARE[VMware vSphere]
-            OPENSTACK[OpenStack]
-        end
-        
-        subgraph "Edge/IoT"
-            IOT_DEVICES[IoT Devices]
-            EDGE_NODES[Edge Nodes]
-        end
-    end
-
-    %% Monitoring & Observability
-    subgraph "📈 Observability & Monitoring"
-        direction TB
-        PROMETHEUS[Prometheus]
-        GRAFANA[Grafana]
-        JAEGER[Jaeger Tracing]
-        LOKI[Loki Logging]
-        ALERTMANAGER[Alert Manager]
-        OTEL[OpenTelemetry]
-    end
-
-    %% Security & Compliance
-    subgraph "🔒 Security & Compliance"
-        direction TB
-        VAULT[HashiCorp Vault]
-        POLICY_ENGINE[OPA Policy Engine]
-        SECURITY_SCANNER[Security Scanner]
-        COMPLIANCE_MGR[Compliance Manager]
-        CERT_MGR[Certificate Manager]
-    end
-
-    %% Connections - User to API
-    UI --> LB
-    CLI --> LB  
-    LB --> AUTH
-    AUTH --> RATE
-    RATE --> API_GW
-
-    %% API Gateway to Core Services
-    API_GW --> REQ_ANALYZER
-    API_GW --> IAC_GEN
-    API_GW --> WORKFLOW_ENGINE
-
-    %% AI Processing Flow
-    REQ_ANALYZER --> MULTI_AGENT
-    MULTI_AGENT --> SPEC_GEN
-    SPEC_GEN --> IAC_GEN
-
-    %% Multi-Agent Connections
-    MULTI_AGENT --- SECURITY_AGENT
-    MULTI_AGENT --- NETWORK_AGENT
-    MULTI_AGENT --- DB_AGENT
-    MULTI_AGENT --- K8S_AGENT
-    MULTI_AGENT --- COST_AGENT
-    MULTI_AGENT --- VALIDATION_AGENT
-
-    %% External LLM Connections
-    MULTI_AGENT -.-> OPENAI
-    MULTI_AGENT -.-> ANTHROPIC
-    MULTI_AGENT -.-> OLLAMA
-    MULTI_AGENT -.-> AZURE_AI
-
-    %% Infrastructure Engine Flow
-    IAC_GEN --> TEMPLATE_MGR
-    TEMPLATE_MGR --> VALIDATOR
-    VALIDATOR --> WORKFLOW_ENGINE
-
-    %% Deployment Flow
-    WORKFLOW_ENGINE --> DEPLOY_MGR
-    DEPLOY_MGR --> GITLAB
-    GITLAB --> ARGOCD
-    ARGOCD --> AWS
-    ARGOCD --> GCP
-    ARGOCD --> AZURE
-    ARGOCD --> PROXMOX
-    ARGOCD --> K8S
-
-    %% Data Layer Connections
-    REQ_ANALYZER <--> POSTGRES
-    IAC_GEN <--> POSTGRES
-    WORKFLOW_ENGINE <--> POSTGRES
-    MULTI_AGENT <--> REDIS
-    REQ_ANALYZER <--> NEO4J
-    SPEC_GEN <--> KNOWLEDGE_BASE
-
-    %% Monitoring Connections
-    WORKFLOW_ENGINE --> OTEL
-    DEPLOY_MGR --> OTEL
-    API_GW --> OTEL
-    OTEL --> PROMETHEUS
-    PROMETHEUS --> GRAFANA
-    PROMETHEUS --> ALERTMANAGER
-    OTEL --> JAEGER
-    OTEL --> LOKI
-
-    %% Security Connections
-    AUTH <--> VAULT
-    DEPLOY_MGR <--> VAULT
-    VALIDATOR --> POLICY_ENGINE
-    IAC_GEN --> SECURITY_SCANNER
-    DEPLOY_MGR --> CERT_MGR
-
-    %% Feedback Loops
-    PROMETHEUS -.-> COST_AGENT
-    JAEGER -.-> VALIDATION_AGENT
-    DEPLOY_MGR -.-> KNOWLEDGE_BASE
-
+    
+    %% External Systems
+    L[LLM Providers<br/>OpenAI • Anthropic • Ollama]
+    M[Infrastructure Targets<br/>AWS • GCP • Proxmox • K8s]
+    N[Observability<br/>Prometheus • Grafana • Jaeger]
+    
+    I --> L
+    K --> M
+    H --> N
+    
     %% Styling
-    classDef userLayer fill:#e1f5fe
-    classDef apiLayer fill:#f3e5f5  
-    classDef coreLayer fill:#e8f5e8
-    classDef dataLayer fill:#fff3e0
-    classDef infraLayer fill:#fce4ec
-    classDef monitorLayer fill:#f1f8e9
-    classDef securityLayer fill:#ffebee
-
-    class UI,CLI,API_DOCS userLayer
-    class LB,AUTH,RATE,API_GW apiLayer
-    class REQ_ANALYZER,MULTI_AGENT,SPEC_GEN,IAC_GEN,TEMPLATE_MGR,VALIDATOR,WORKFLOW_ENGINE,DEPLOY_MGR,ROLLBACK_MGR coreLayer
-    class POSTGRES,REDIS,NEO4J,KNOWLEDGE_BASE dataLayer
-    class AWS,GCP,AZURE,DO,PROXMOX,K8S,VMWARE,OPENSTACK,IOT_DEVICES,EDGE_NODES infraLayer
-    class PROMETHEUS,GRAFANA,JAEGER,LOKI,ALERTMANAGER,OTEL monitorLayer
-    class VAULT,POLICY_ENGINE,SECURITY_SCANNER,COMPLIANCE_MGR,CERT_MGR securityLayer
+    classDef primary fill:#e3f2fd,stroke:#1976d2,stroke-width:3px
+    classDef engine fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
+    classDef external fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    
+    class A,C,E,G primary
+    class B,D,F,H,I,J,K engine
+    class L,M,N external
 ```
 
 ### **Technology Stack**
