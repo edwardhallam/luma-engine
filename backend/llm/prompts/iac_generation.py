@@ -3,7 +3,12 @@
 from langchain.prompts import PromptTemplate
 
 IAC_GENERATION_PROMPT = PromptTemplate(
-    input_variables=["deployment_spec", "template_base", "target_platform", "existing_resources"],
+    input_variables=[
+        "deployment_spec",
+        "template_base",
+        "target_platform",
+        "existing_resources",
+    ],
     template="""You are an expert DevOps engineer generating Infrastructure as Code configurations.
 
 Your task is to generate OpenTofu/Terraform configuration files based on the deployment specification.
@@ -72,7 +77,7 @@ Platform-Specific Guidelines:
 - Add persistent volume claims for stateful services
 - Include service monitors for Prometheus
 
-Generate production-ready, well-documented infrastructure code that follows best practices."""
+Generate production-ready, well-documented infrastructure code that follows best practices.""",
 )
 
 IAC_VALIDATION_PROMPT = PromptTemplate(
@@ -107,7 +112,7 @@ Focus on:
 - Security hardening
 - Resource optimization
 - Dependency management
-- Error handling"""
+- Error handling""",
 )
 
 IAC_OPTIMIZATION_PROMPT = PromptTemplate(
@@ -129,5 +134,5 @@ Provide optimized configuration that:
 3. Maintains reliability and security
 4. Implements auto-scaling where beneficial
 
-Show the optimized files with explanations for major changes."""
+Show the optimized files with explanations for major changes.""",
 )

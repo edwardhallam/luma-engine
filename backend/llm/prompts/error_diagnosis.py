@@ -3,7 +3,12 @@
 from langchain.prompts import PromptTemplate
 
 ERROR_DIAGNOSIS_PROMPT = PromptTemplate(
-    input_variables=["error_logs", "deployment_config", "system_state", "previous_fixes"],
+    input_variables=[
+        "error_logs",
+        "deployment_config",
+        "system_state",
+        "previous_fixes",
+    ],
     template="""You are an expert DevOps troubleshooter analyzing deployment failures.
 
 Your task is to diagnose the error, categorize it, and provide actionable solutions.
@@ -105,7 +110,7 @@ Analysis Guidelines:
 6. Check for known issues with similar patterns
 7. Evaluate security and permission settings
 
-Provide specific, actionable solutions that can be automated where possible."""
+Provide specific, actionable solutions that can be automated where possible.""",
 )
 
 ERROR_LEARNING_PROMPT = PromptTemplate(
@@ -143,7 +148,7 @@ Create a knowledge base entry in JSON format:
   "related_patterns": ["list of related pattern IDs"]
 }}
 
-This entry will be used to automatically diagnose and resolve similar issues in the future."""
+This entry will be used to automatically diagnose and resolve similar issues in the future.""",
 )
 
 HEALTH_CHECK_DIAGNOSIS_PROMPT = PromptTemplate(
@@ -175,7 +180,7 @@ Provide a health diagnosis in JSON format:
     {{
       "metric": "string",
       "current_value": "string",
-      "threshold": "string", 
+      "threshold": "string",
       "severity": "string",
       "impact": "string"
     }}
@@ -194,5 +199,5 @@ Provide a health diagnosis in JSON format:
       "automation_possible": "boolean"
     }}
   ]
-}}"""
+}}""",
 )

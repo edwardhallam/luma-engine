@@ -1,8 +1,8 @@
 """Simplified main app for testing without LLM dependencies."""
 
-import time
 import logging
-from typing import Dict, Any
+import time
+from typing import Any, Dict
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -13,13 +13,15 @@ from pydantic import BaseModel
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+
 # Simple configuration
 class TestSettings:
     app_name = "AI Infrastructure Deployer (Test)"
     app_version = "0.1.0"
     debug = True
     environment = "test"
-    
+
+
 settings = TestSettings()
 
 # Create FastAPI app
@@ -39,10 +41,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 # Simple models for testing
 class RequirementAnalysisRequest(BaseModel):
     user_request: str
     context: Dict[str, Any] = {}
+
 
 class RequirementAnalysisResponse(BaseModel):
     success: bool
@@ -50,6 +54,7 @@ class RequirementAnalysisResponse(BaseModel):
     specification: Dict[str, Any] = {}
     confidence_score: float = 0.8
     provider_used: str = "test"
+
 
 # Test endpoints
 @app.get("/", tags=["system"])
@@ -59,8 +64,9 @@ async def root():
         "message": f"Welcome to {settings.app_name}",
         "version": settings.app_version,
         "status": "running",
-        "docs_url": "/docs"
+        "docs_url": "/docs",
     }
+
 
 @app.get("/health", tags=["system"])
 async def health_check():
@@ -69,8 +75,9 @@ async def health_check():
         "status": "healthy",
         "version": settings.app_version,
         "environment": settings.environment,
-        "timestamp": time.time()
+        "timestamp": time.time(),
     }
+
 
 @app.get("/api/v1/llm/providers/status", tags=["llm"])
 async def get_provider_status():
@@ -83,15 +90,18 @@ async def get_provider_status():
             "fallback": False,
             "model": "test-model",
             "last_check": time.time(),
-            "response_time_ms": 100.0
+            "response_time_ms": 100.0,
         }
     ]
 
+
 @app.post("/api/v1/requirements/analyze", tags=["requirements"])
-async def analyze_requirements(request: RequirementAnalysisRequest) -> RequirementAnalysisResponse:
+async def analyze_requirements(
+    request: RequirementAnalysisRequest,
+) -> RequirementAnalysisResponse:
     """Mock requirements analysis."""
     logger.info(f"Analyzing request: {request.user_request}")
-    
+
     # Simple mock analysis based on keywords
     spec = {
         "service_type": "web-application",
@@ -102,26 +112,27 @@ async def analyze_requirements(request: RequirementAnalysisRequest) -> Requireme
             "cpu_cores": 2.0,
             "memory_gb": 4.0,
             "storage_gb": 50.0,
-            "gpu_required": False
-        }
+            "gpu_required": False,
+        },
     }
-    
+
     # Adjust based on keywords
     if "chat" in request.user_request.lower():
         spec["service_type"] = "chat-service"
         spec["template"] = "librechat"
-        
+
     if "database" in request.user_request.lower():
         spec["dependencies"] = [
             {"service": "postgresql", "type": "database", "required": True}
         ]
-    
+
     return RequirementAnalysisResponse(
         success=True,
         analysis_id=f"test-{int(time.time())}",
         specification=spec,
-        confidence_score=0.85
+        confidence_score=0.85,
     )
+
 
 @app.get("/api/v1/templates", tags=["templates"])
 async def list_templates():
@@ -133,20 +144,21 @@ async def list_templates():
                 "name": "LibreChat",
                 "description": "Chat interface with LLM support",
                 "category": "chat-services",
-                "status": "active"
+                "status": "active",
             },
             {
                 "template_id": "postgresql",
                 "name": "PostgreSQL Database",
                 "description": "PostgreSQL database server",
-                "category": "databases", 
-                "status": "active"
-            }
+                "category": "databases",
+                "status": "active",
+            },
         ],
         "total": 2,
         "page": 1,
-        "page_size": 20
+        "page_size": 20,
     }
+
 
 @app.post("/api/v1/deployments", tags=["deployments"])
 async def create_deployment(deployment_data: Dict[str, Any]):
@@ -156,8 +168,9 @@ async def create_deployment(deployment_data: Dict[str, Any]):
         "status": "pending",
         "specification": deployment_data,
         "created_at": time.time(),
-        "progress": 0
+        "progress": 0,
     }
+
 
 @app.get("/api/v1/deployments", tags=["deployments"])
 async def list_deployments():
@@ -169,20 +182,22 @@ async def list_deployments():
                 "status": "running",
                 "service_name": "test-chat-service",
                 "created_at": time.time() - 3600,
-                "progress": 100
+                "progress": 100,
             }
         ],
         "total": 1,
         "page": 1,
-        "page_size": 20
+        "page_size": 20,
     }
+
 
 if __name__ == "__main__":
     import uvicorn
+
     uvicorn.run(
         "test_main:app",
         host="0.0.0.0",
         port=8000,
         reload=True,
-        log_level="info"
+        log_level="info",  # nosec B104
     )

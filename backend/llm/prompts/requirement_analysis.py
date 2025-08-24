@@ -46,7 +46,7 @@ Please analyze the request and provide a structured response in JSON format with
   ],
   "scaling": {{
     "min_instances": "number",
-    "max_instances": "number", 
+    "max_instances": "number",
     "auto_scaling": "boolean"
   }},
   "networking": {{
@@ -82,7 +82,7 @@ Important Notes:
 - Always include health checks and monitoring
 - Consider scalability from the start
 
-Provide only the JSON response, no additional text or explanations."""
+Provide only the JSON response, no additional text or explanations.""",
 )
 
 
@@ -108,5 +108,5 @@ Focus on:
 3. Optimizing resource allocation based on feedback
 4. Adjusting configuration parameters as requested
 
-Provide only the updated JSON specification."""
+Provide only the updated JSON specification.""",
 )

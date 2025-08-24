@@ -1,0 +1,91 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: debug-statements
+      - id: check-executables-have-shebangs
+
+  - repo: https://github.com/psf/black
+    rev: 23.11.0
+    hooks:
+      - id: black
+        language_version: python3.11
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0
+    hooks:
+      - id: isort
+        args: ["--profile", "black"]
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 6.1.0
+    hooks:
+      - id: flake8
+
+  # Temporarily disable mypy due to dependency issues
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.7.1
+  #   hooks:
+  #     - id: mypy
+  #       additional_dependencies: [types-requests, types-PyYAML]
+  #       exclude: ^(tests/|docs/|scripts/)
+  #       args: [--explicit-package-bases]
+
+  # Security scanning with detect-secrets
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: ^(\\.secrets\\.baseline|.*\\.lock|.*\\.log|.*\\.pyc|.*__pycache__.*)$
+
+  # Security linting with bandit
+  - repo: https://github.com/pycqa/bandit
+    rev: 1.7.5
+    hooks:
+      - id: bandit
+        args: ["-r", "backend/", "cli/"]
+        exclude: ^(tests/|test_.*\.py)
+
+  # Skip safety check for now due to Poetry requirement
+  # - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+  #   rev: v1.3.2
+  #   hooks:
+  #     - id: python-safety-dependencies-check
+  #       files: pyproject.toml
+
+  # Additional security checks for sensitive files
+  - repo: local
+    hooks:
+      - id: check-private-key
+        name: Check for private keys
+        entry: '-----BEGIN (RSA |DSA |EC |OPENSSH |PGP |)PRIVATE KEY-----'
+        language: pygrep
+        types: [text]
+      - id: check-aws-credentials
+        name: Check for AWS credentials
+        entry: '(AKIA[0-9A-Z]{16}|aws_access_key_id\\s*=\\s*[A-Z0-9]+)'
+        language: pygrep
+        types: [text]
+        exclude: ^(\\.env\\.example|docs/|README\\.md)$
+      - id: check-database-urls
+        name: Check for database URLs with credentials
+        entry: '(postgresql|mysql|mongodb)://[^:\s]+:[^@\s]+@[^/\s]+/'
+        language: pygrep
+        types: [text]
+        exclude: ^(\.env\.example|docs/|README\.md)$
+
+  # Check for TODO/FIXME without issue numbers
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-toml
+      - id: check-json
+
+default_language_version:
+  python: python3.11

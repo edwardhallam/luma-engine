@@ -35,6 +35,9 @@ lint:
 	isort --check-only .
 	flake8 .
 	mypy backend cli
+	bandit -r backend/ cli/ -f json -o bandit-report.json || true
+	safety check --json --output safety-report.json || true
+	detect-secrets scan --baseline .secrets.baseline --all-files || true
 
 # Format code
 format:
@@ -111,3 +114,27 @@ metrics:
 
 health:
 	curl http://localhost:8000/health
+
+# Security commands
+security-scan:
+	@echo "Running comprehensive security scan..."
+	bandit -r backend/ cli/ -f json -o bandit-report.json -v
+	safety check --json --output safety-report.json
+	detect-secrets scan --baseline .secrets.baseline --all-files
+
+security-baseline:
+	@echo "Creating detect-secrets baseline..."
+	detect-secrets scan --baseline .secrets.baseline --all-files --update .secrets.baseline
+
+security-audit:
+	@echo "Running security audit..."
+	detect-secrets audit .secrets.baseline
+	@echo "Security reports generated:"
+	@echo "  - bandit-report.json"
+	@echo "  - safety-report.json"
+	@echo "  - .secrets.baseline"
+
+security-install:
+	@echo "Installing security tools..."
+	pip install detect-secrets bandit safety
+	detect-secrets scan --baseline .secrets.baseline --all-files --update .secrets.baseline

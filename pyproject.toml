@@ -25,7 +25,7 @@ dependencies = [
     "uvicorn[standard]>=0.24.0",
     "pydantic>=2.5.0",
     "pydantic-settings>=2.1.0",
-    
+
     # LLM and AI
     "langchain>=0.1.0",
     "langchain-openai>=0.0.5",
@@ -33,32 +33,32 @@ dependencies = [
     "langchain-community>=0.0.10",
     "openai>=1.6.0",
     "anthropic>=0.8.0",
-    
+
     # Infrastructure and deployment
     "temporal-python-sdk>=1.0.15",
     "proxmoxer>=2.0.1",
     "python-gitlab>=4.2.0",
     "kubernetes>=28.1.0",
     "docker>=7.0.0",
-    
+
     # Database and storage
     "sqlalchemy>=2.0.23",
     "alembic>=1.13.1",
     "asyncpg>=0.29.0",
     "redis>=5.0.1",
     "psycopg2-binary>=2.9.9",
-    
+
     # Templates and configuration
     "jinja2>=3.1.2",
     "pyyaml>=6.0.1",
     "toml>=0.10.2",
     "jsonschema>=4.20.0",
-    
+
     # HTTP and API clients
     "httpx>=0.25.2",
     "aiohttp>=3.9.1",
     "requests>=2.31.0",
-    
+
     # Utilities
     "click>=8.1.7",
     "rich>=13.7.0",
@@ -66,12 +66,12 @@ dependencies = [
     "python-multipart>=0.0.6",
     "python-jose[cryptography]>=3.3.0",
     "passlib[bcrypt]>=1.7.4",
-    
+
     # Monitoring and observability
     "prometheus-client>=0.19.0",
     "structlog>=23.2.0",
     "python-json-logger>=2.0.7",
-    
+
     # Vector database and embeddings
     "chromadb>=0.4.18",
     "qdrant-client>=1.7.0",
@@ -89,6 +89,9 @@ dev = [
     "flake8>=6.1.0",
     "mypy>=1.7.1",
     "pre-commit>=3.6.0",
+    "detect-secrets>=1.4.0",
+    "bandit[toml]>=1.7.5",
+    "safety>=2.3.0",
 ]
 
 test = [
@@ -142,6 +145,21 @@ profile = "black"
 multi_line_output = 3
 line_length = 88
 known_first_party = ["backend", "cli", "sdk"]
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "E501", "W503"]
+exclude = [
+    ".git",
+    "__pycache__",
+    "venv",
+    ".venv",
+    "build",
+    "dist",
+    "*.egg-info",
+    "migrations",
+    "node_modules"
+]
 
 [tool.mypy]
 python_version = "3.11"
@@ -209,4 +227,52 @@ exclude_lines = [
     "if __name__ == .__main__.:",
     "class .*\\bProtocol\\):",
     "@(abc\\.)?abstractmethod",
+]
+
+[tool.bandit]
+exclude_dirs = ["tests", "venv", ".venv", "build", "dist"]
+skips = ["B101", "B601"]
+
+[tool.bandit.assert_used]
+skips = ["*/*test*.py", "*/test_*.py"]
+
+[tool.detect-secrets]
+plugins_used = [
+    { name = "ArtifactoryDetector" },
+    { name = "AWSKeyDetector" },
+    { name = "AzureStorageKeyDetector" },
+    { name = "Base64HighEntropyString", limit = 4.5 },
+    { name = "BasicAuthDetector" },
+    { name = "CloudantDetector" },
+    { name = "DiscordBotTokenDetector" },
+    { name = "GitHubTokenDetector" },
+    { name = "HexHighEntropyString", limit = 3.0 },
+    { name = "IbmCloudIamDetector" },
+    { name = "IbmCosHmacDetector" },
+    { name = "JwtTokenDetector" },
+    { name = "KeywordDetector", keyword_exclude = ""},
+    { name = "MailchimpDetector" },
+    { name = "NpmDetector" },
+    { name = "PrivateKeyDetector" },
+    { name = "SendGridDetector" },
+    { name = "SlackDetector" },
+    { name = "SoftlayerDetector" },
+    { name = "SquareOAuthDetector" },
+    { name = "StripeDetector" },
+    { name = "TwilioKeyDetector" }
+]
+exclude_files = "^(\\.secrets\\.baseline|.*\\.lock|.*\\.log|.*\\.pyc|.*__pycache__.*)$"
+filters_used = [
+    { path = "detect_secrets.filters.allowlist.is_line_allowlisted" },
+    { path = "detect_secrets.filters.common.is_baseline_file" },
+    { path = "detect_secrets.filters.common.is_ignored_due_to_verification_policies", min_level = 2 },
+    { path = "detect_secrets.filters.heuristic.is_indirect_reference" },
+    { path = "detect_secrets.filters.heuristic.is_likely_id_string" },
+    { path = "detect_secrets.filters.heuristic.is_lock_file" },
+    { path = "detect_secrets.filters.heuristic.is_not_alphanumeric_string" },
+    { path = "detect_secrets.filters.heuristic.is_potential_uuid" },
+    { path = "detect_secrets.filters.heuristic.is_prefixed_with_dollar_sign" },
+    { path = "detect_secrets.filters.heuristic.is_sequential_string" },
+    { path = "detect_secrets.filters.heuristic.is_swagger_file" },
+    { path = "detect_secrets.filters.heuristic.is_templated_secret" }
 ]

@@ -1,12 +1,13 @@
 """LLM provider implementations."""
 
+import logging
 from abc import ABC, abstractmethod
-from typing import Dict, Any, Optional, List
-from langchain_openai import ChatOpenAI
+from typing import Any, Dict, List, Optional
+
+from langchain.schema import BaseLanguageModel
 from langchain_anthropic import ChatAnthropic
 from langchain_community.llms import Ollama
-from langchain.schema import BaseLanguageModel
-import logging
+from langchain_openai import ChatOpenAI
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +57,7 @@ class OpenAIProvider(LLMProvider):
         if not self._client:
             if not self.validate_config():
                 raise ValueError("Invalid OpenAI configuration")
-            
+
             self._client = ChatOpenAI(
                 api_key=self.api_key,
                 model=self.model,
@@ -88,7 +89,7 @@ class AnthropicProvider(LLMProvider):
         if not self._client:
             if not self.validate_config():
                 raise ValueError("Invalid Anthropic configuration")
-            
+
             self._client = ChatAnthropic(
                 api_key=self.api_key,
                 model=self.model,
@@ -111,10 +112,15 @@ class OllamaProvider(LLMProvider):
         """Validate Ollama configuration."""
         try:
             import requests
+
             response = requests.get(f"{self.base_url}/api/tags", timeout=5)
-            available_models = [model["name"] for model in response.json().get("models", [])]
+            available_models = [
+                model["name"] for model in response.json().get("models", [])
+            ]
             if self.model not in available_models:
-                logger.warning(f"Model {self.model} not found in Ollama. Available: {available_models}")
+                logger.warning(
+                    f"Model {self.model} not found in Ollama. Available: {available_models}"
+                )
                 return False
             return True
         except Exception as e:
@@ -126,7 +132,7 @@ class OllamaProvider(LLMProvider):
         if not self._client:
             if not self.validate_config():
                 raise ValueError("Invalid Ollama configuration")
-            
+
             self._client = Ollama(
                 base_url=self.base_url,
                 model=self.model,
@@ -149,7 +155,7 @@ class ProviderFactory:
         """Create a provider instance."""
         if provider_type not in cls._providers:
             raise ValueError(f"Unknown provider type: {provider_type}")
-        
+
         provider_class = cls._providers[provider_type]
         return provider_class(config)
 
