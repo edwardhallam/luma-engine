@@ -18,6 +18,20 @@ from .error import (
     MonitoringRecommendation,
     RootCauseFix,
 )
+from .iac import (
+    CostEstimate,
+    GeneratedResource,
+    IaCFormat,
+    IaCGenerationRequest,
+    IaCGenerationResponse,
+    IaCGenerationResult,
+    IaCProvider,
+    IaCValidationRequest,
+    IaCValidationResponse,
+    IaCValidationResult,
+    ValidationIssue,
+    ValidationSeverity,
+)
 from .llm import LLMProviderStatus, LLMRequest, LLMResponse
 from .requirement import (
     RequirementAnalysisRequest,
@@ -56,4 +70,17 @@ __all__ = [
     "LLMProviderStatus",
     "LLMRequest",
     "LLMResponse",
+    # IaC schemas
+    "IaCProvider",
+    "IaCFormat",
+    "IaCGenerationRequest",
+    "IaCGenerationResponse",
+    "IaCGenerationResult",
+    "IaCValidationRequest",
+    "IaCValidationResponse",
+    "IaCValidationResult",
+    "ValidationIssue",
+    "ValidationSeverity",
+    "GeneratedResource",
+    "CostEstimate",
 ]

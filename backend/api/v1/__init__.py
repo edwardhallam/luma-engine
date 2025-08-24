@@ -3,6 +3,7 @@
 from fastapi import APIRouter
 
 from .deployments import router as deployments_router
+from .iac import router as iac_router
 from .llm import router as llm_router
 from .requirements import router as requirements_router
 from .security import router as security_router
@@ -14,6 +15,7 @@ api_router = APIRouter(prefix="/api/v1")
 api_router.include_router(
     deployments_router, prefix="/deployments", tags=["deployments"]
 )
+api_router.include_router(iac_router, prefix="/iac", tags=["iac"])
 api_router.include_router(templates_router, prefix="/templates", tags=["templates"])
 api_router.include_router(
     requirements_router, prefix="/requirements", tags=["requirements"]
