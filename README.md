@@ -1,14 +1,55 @@
-# LumaEngine 🌟
+# LumaEngine (Alpha) 🌟
+
+⚠️ **This project is in active development. Expect breaking changes.**
+
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
 [![Docker](https://img.shields.io/badge/Docker-ready-blue.svg)](https://www.docker.com/)
 
-**AI Infrastructure Platform for Homelabs & SMBs**
+**Product Vision**
 
 LumaEngine enables infrastructure automation by transforming natural language requirements into production-ready deployments through conversational AI. Purpose-built for homelab enthusiasts and small-to-medium businesses, eliminating the complexity barrier of traditional enterprise infrastructure tools. Simply describe your infrastructure needs in plain English, and LumaEngine intelligently provisions, configures, and maintains your self-hosted resources.
 
+## 📊 Project Status
+
+### Implementation Progress
+
+| Component | Description | Structure | Implementation | Status |
+|-----------|-------------|:---------:|:--------------:|:------:|
+| **Core Framework** | | | | |
+| FastAPI Application | Async REST API with OpenAPI docs | ✅ 100% | ✅ 100% | 🟢 Working |
+| API Endpoints | 15+ endpoints with validation | ✅ 100% | ⚠️ 10% | 🟡 Partial |
+| Data Models | Pydantic schemas with validation | ✅ 100% | ✅ 100% | 🟢 Working |
+| Configuration | Environment-based settings | ✅ 100% | ✅ 100% | 🟢 Working |
+| **AI/LLM Integration** | | | | |
+| LLM Providers | OpenAI, Anthropic, Ollama support | ✅ 100% | ⚠️ 40% | 🔴 Not Working |
+| LangChain Agents | Specialized requirement agents | ✅ 100% | ⚠️ 30% | 🔴 Not Working |
+| Prompt Templates | Analysis & IaC generation prompts | ✅ 100% | ✅ 100% | 🔴 Not Connected |
+| **Infrastructure** | | | | |
+| IaC Generation | OpenTofu/Terraform generation | ⚠️ 20% | ❌ 0% | 🔴 Not Working |
+| Template Engine | Service template system | ⚠️ 50% | ❌ 0% | 🔴 Not Working |
+| Deployment Engine | Infrastructure provisioning | ⚠️ 10% | ❌ 0% | 🔴 Not Working |
+| **Data & Workflow** | | | | |
+| Database Layer | PostgreSQL with SQLAlchemy | ⚠️ 20% | ❌ 0% | 🔴 Not Working |
+| Temporal Workflows | Orchestration engine | ⚠️ 10% | ❌ 0% | 🔴 Not Working |
+| Redis Caching | Session & cache management | ⚠️ 30% | ❌ 0% | 🔴 Not Working |
+| **Development** | | | | |
+| Docker Environment | Dev services & infrastructure | ✅ 100% | ✅ 100% | 🟢 Working |
+| CI/CD Pipeline | GitLab CI with full stages | ✅ 100% | ✅ 100% | 🟢 Working |
+| Documentation | Guides, examples, API docs | ✅ 90% | ✅ 90% | 🟢 Working |
+| Testing Framework | Unit, integration, E2E setup | ⚠️ 30% | ❌ 5% | 🔴 Minimal |
+
+### Legend
+- 🟢 **Working** - Feature is functional and ready to use
+- 🟡 **Partial** - Basic functionality available, full implementation in progress
+- 🔴 **Not Working** - Planned/structured but not yet functional
+- ✅ **Complete** - Fully implemented
+- ⚠️ **In Progress** - Partially implemented
+- ❌ **Not Started** - Not yet implemented
+
+  
 ### **Planned Key Capabilities**
 
 - **🏠 Homelab Focused**: Native support for Proxmox, DigitalOcean, local deployments and other various hosting solutions
