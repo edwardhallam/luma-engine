@@ -1,0 +1,11 @@
+system.forceSearchAttributesCacheRefreshOnRead:
+  - value: true
+
+history.defaultActivityRetryPolicy:
+  InitialIntervalInSeconds: 1
+  MaximumIntervalInSeconds: 100
+  BackoffCoefficient: 2
+  MaximumAttempts: 500
+
+system.enableActivityEagerExecution:
+  - value: true

@@ -23,9 +23,9 @@ router = APIRouter()
 
 def get_deployment_service() -> DeploymentService:
     """Dependency to get deployment service instance."""
-    # This will be implemented when we create the service layer
-    # For now, return a placeholder
-    raise NotImplementedError("DeploymentService not yet implemented")
+    # For now, create a new instance each time
+    # In production, this would be a singleton or dependency injection
+    return DeploymentService()
 
 
 @router.post(

@@ -7,8 +7,8 @@ from typing import Any, Dict, List, Optional
 from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain.memory import ConversationBufferMemory
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.schema import BaseLanguageModel
 from langchain.tools import Tool
+from langchain_core.language_models import BaseLanguageModel
 
 from .prompts import (
     ERROR_DIAGNOSIS_PROMPT,

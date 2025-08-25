@@ -21,25 +21,26 @@ classifiers = [
 
 dependencies = [
     # FastAPI and web framework
-    "fastapi>=0.104.0",
-    "uvicorn[standard]>=0.24.0",
-    "pydantic>=2.5.0",
-    "pydantic-settings>=2.1.0",
+    "fastapi>=0.104.0,<0.106.0",
+    "uvicorn[standard]>=0.24.0,<0.26.0",
+    "pydantic>=2.5.0,<2.6.0",
+    "pydantic-settings>=2.1.0,<2.2.0",
 
     # LLM and AI
-    "langchain>=0.1.0",
-    "langchain-openai>=0.0.5",
-    "langchain-anthropic>=0.1.0",
-    "langchain-community>=0.0.10",
-    "openai>=1.6.0",
-    "anthropic>=0.8.0",
+    "langchain>=0.1.0,<0.2.0",
+    "langchain-openai>=0.0.5,<0.1.0",
+    "langchain-anthropic>=0.1.0,<0.2.0",
+    "langchain-community>=0.0.10,<0.1.0",
+    "langsmith>=0.0.77,<0.2.0",
+    "openai>=1.6.0,<2.0.0",
+    "anthropic>=0.8.0,<1.0.0",
 
     # Infrastructure and deployment
-    "temporal-python-sdk>=1.0.15",
-    "proxmoxer>=2.0.1",
-    "python-gitlab>=4.2.0",
-    "kubernetes>=28.1.0",
-    "docker>=7.0.0",
+    "temporal-python-sdk>=1.0.15,<2.0.0",
+    "proxmoxer>=2.0.1,<3.0.0",
+    "python-gitlab>=4.2.0,<5.0.0",
+    "kubernetes>=28.1.0,<29.0.0",
+    "docker>=7.0.0,<8.0.0",
 
     # Database and storage
     "sqlalchemy>=2.0.23",

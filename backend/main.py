@@ -94,11 +94,13 @@ async def init_database():
 
 async def init_llm_services():
     """Initialize LLM services."""
-    from backend.llm.service import LLMService
-
     try:
+        from backend.llm.service import LLMService
+
         LLMService(settings.llm_config)  # Initialize and test
         logger.info("LLM services initialized")
+    except ImportError as e:
+        logger.warning(f"LLM services not available (missing dependencies): {e}")
     except Exception as e:
         logger.warning(f"LLM services initialization failed: {e}")
 
@@ -146,10 +148,10 @@ app = FastAPI(
 # Add middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.allowed_origins,
+    allow_origins=settings.cors_origins,
     allow_credentials=True,
-    allow_methods=settings.allowed_methods,
-    allow_headers=settings.allowed_headers,
+    allow_methods=settings.cors_methods,
+    allow_headers=settings.cors_headers,
 )
 
 # Add trusted host middleware in production

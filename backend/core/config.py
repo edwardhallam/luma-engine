@@ -219,6 +219,27 @@ class Settings(BaseSettings):
             "bucket": self.minio_bucket,
         }
 
+    @property
+    def cors_origins(self) -> List[str]:
+        """Get CORS origins as list."""
+        if self.allowed_origins == "*":
+            return ["*"]
+        return [origin.strip() for origin in self.allowed_origins.split(",")]
+
+    @property
+    def cors_methods(self) -> List[str]:
+        """Get CORS methods as list."""
+        if self.allowed_methods == "*":
+            return ["*"]
+        return [method.strip() for method in self.allowed_methods.split(",")]
+
+    @property
+    def cors_headers(self) -> List[str]:
+        """Get CORS headers as list."""
+        if self.allowed_headers == "*":
+            return ["*"]
+        return [header.strip() for header in self.allowed_headers.split(",")]
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"

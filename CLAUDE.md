@@ -9,6 +9,13 @@ make test          # Run all tests
 make lint          # Run linting and formatting
 make ci-test       # Full CI test suite
 gh project view 1 --owner edwardhallam  # View project workflow status
+
+# Service Monitoring
+make monitor        # Check service health once
+make monitor-watch  # Continuous monitoring
+make monitor-auto   # Auto-restart failed services
+make services-restart # Restart all services
+make services-stop  # Stop all services
 ```
 
 ## Quick Reference
@@ -18,6 +25,7 @@ gh project view 1 --owner edwardhallam  # View project workflow status
 - Tests: tests/
 - API docs: http://localhost:8000/docs
 - Health check: http://localhost:8000/health
+- Web interface: http://localhost:3000 (run make web-dev to start)
 
 ## IMPORTANT Code Standards
 - **YOU MUST** use async/await patterns for all API endpoints
@@ -89,7 +97,7 @@ Democratize infrastructure automation for homelab enthusiasts and small-to-mediu
 - **PostgreSQL** (localhost:5432) - Main database
 - **Redis** (localhost:6379) - Caching and session storage
 - **Neo4j** (localhost:7474) - Infrastructure knowledge graph
-- **Temporal** (localhost:7233) - Workflow orchestration engine  
+- **Temporal** (localhost:7233) - Workflow orchestration engine
 - **Temporal Web UI** (localhost:8080) - Workflow monitoring
 - **Ollama** (localhost:11434) - Local LLM inference (privacy/cost control)
 - **Prometheus** (localhost:9090) - Metrics and cost tracking
@@ -127,12 +135,49 @@ LLAMA_CPP_HOST=http://localhost:8080
 VLLM_HOST=http://localhost:8000
 ```
 
+## Local Development Setup Plan
+
+### Current Deployment Status
+As of 2025-08-25, the local development environment setup is in progress:
+
+1. **Environment Setup**: Virtual environment created with Python 3.13.7
+2. **Dependencies**: Core packages and project dependencies installed via `make setup`
+3. **Services**: Docker services not yet configured (Docker not available in current environment)
+4. **Application**: Ready to start FastAPI application without external dependencies
+
+### Minimal Development Deployment
+For environments without Docker, the application can run with minimal configuration:
+- **Database**: SQLite (default for development, no PostgreSQL required)
+- **Cache**: In-memory caching (no Redis required)
+- **LLM**: Optional API providers (can run without external LLM services)
+- **Monitoring**: Basic health checks and metrics (no external observability stack)
+
+### Deployment Steps Completed
+- [x] Python environment setup (3.13.7)
+- [x] Virtual environment creation (./venv/)
+- [x] Project dependencies installation
+- [x] Basic .env configuration file
+- [ ] Docker services startup
+- [ ] FastAPI application startup
+- [ ] Health check validation
+
+### Next Steps for Full Deployment
+1. Start FastAPI application with `make run`
+2. Verify health endpoint at http://localhost:8000/health
+3. Test API documentation at http://localhost:8000/docs
+4. Start and test web server with `make web-dev` at http://localhost:3000
+5. **Health Check Validation**: When checking deployment health, also launch and test the web server to ensure full stack functionality
+6. Configure Docker services when Docker becomes available
+7. Add LLM provider API keys for full functionality
+
 ## Common Issues
 - **LLM Provider Errors**: Check API keys in .env → use `/api/v1/llm/providers/status`
 - **Database Connection**: Ensure PostgreSQL running → `docker-compose ps` → restart with `make docker-stop && make docker-run`
 - **Import Errors**: Use BaseSettings from pydantic_settings (not pydantic)
 - **Port Conflicts**: Check ports with `netstat -tulpn | grep :8000`
 - **Temporal dependency**: Use version >=1.0.15 (not >=1.5.0)
+- **Docker Not Available**: Application can run with SQLite and in-memory caching for basic functionality
+- **Docker Path Issues**: Docker is installed at `/Applications/Docker.app/Contents/Resources/bin/docker` but not in PATH. Use full path or add to PATH: `export PATH="/Applications/Docker.app/Contents/Resources/bin:$PATH"`
 
 
 ## Testing Patterns

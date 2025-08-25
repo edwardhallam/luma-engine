@@ -18,6 +18,9 @@ class TemplateCategory(str, Enum):
     MONITORING = "monitoring"
     NETWORKING = "networking"
     STORAGE = "storage"
+    ORCHESTRATION = "orchestration"
+    HOMELAB = "homelab"
+    CUSTOM = "custom"
     BASE = "base"
 
 
@@ -27,6 +30,7 @@ class TemplateStatus(str, Enum):
     ACTIVE = "active"
     DEPRECATED = "deprecated"
     BETA = "beta"
+    DRAFT = "draft"
     ARCHIVED = "archived"
 
 
@@ -201,9 +205,9 @@ class TemplateListResponse(BaseModel):
 
     templates: List[Template] = Field(..., description="List of templates")
     total: int = Field(..., description="Total number of templates")
-    categories: List[str] = Field(..., description="Available categories")
     page: int = Field(..., description="Current page number")
     page_size: int = Field(..., description="Number of items per page")
+    total_pages: int = Field(..., description="Total number of pages")
 
 
 class TemplateValidationRequest(BaseModel):
@@ -221,11 +225,11 @@ class TemplateValidationRequest(BaseModel):
 class TemplateValidationResponse(BaseModel):
     """Response from template validation."""
 
-    valid: bool = Field(..., description="Whether template is valid")
+    is_valid: bool = Field(..., description="Whether template is valid")
     errors: List[str] = Field(default_factory=list, description="Validation errors")
     warnings: List[str] = Field(default_factory=list, description="Validation warnings")
-    suggestions: List[str] = Field(
-        default_factory=list, description="Improvement suggestions"
+    recommendations: List[str] = Field(
+        default_factory=list, description="Improvement recommendations"
     )
 
     # Detailed validation results

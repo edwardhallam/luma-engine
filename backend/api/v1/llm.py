@@ -9,16 +9,12 @@ from fastapi.responses import StreamingResponse
 
 from backend.core.exceptions import AIDException
 from backend.llm.service import LLMService
-from backend.models.schemas import (
+from backend.models.schemas import (  # LLMConfiguration,  # TODO: Add this schema; LLMHealthCheck,  # TODO: Add this schema; LLMPromptTemplate,  # TODO: Add this schema; LLMUsageStats,  # TODO: Add this schema
     ErrorDiagnosisRequest,
     ErrorDiagnosisResponse,
-    LLMConfiguration,
-    LLMHealthCheck,
-    LLMPromptTemplate,
     LLMProviderStatus,
     LLMRequest,
     LLMResponse,
-    LLMUsageStats,
 )
 
 logger = logging.getLogger(__name__)
@@ -196,13 +192,13 @@ async def get_provider_status(
 
 @router.get(
     "/health",
-    response_model=LLMHealthCheck,
+    # response_model=LLMHealthCheck,  # TODO: Implement schema
     summary="LLM service health check",
     description="Get overall health status of the LLM service.",
 )
 async def health_check(
     service: LLMService = Depends(get_llm_service),
-) -> LLMHealthCheck:
+) -> dict:
     """LLM service health check."""
     try:
         status_info = service.get_provider_status()
@@ -223,19 +219,19 @@ async def health_check(
             else "unhealthy"
         )
 
-        return LLMHealthCheck(
-            overall_status=overall_status,
-            providers=status_info,
-            primary_provider_healthy=primary_healthy,
-            fallback_available=len(available_providers) > 1,
-            average_response_time=0.0,  # Would be calculated from metrics
-            success_rate=1.0,  # Would be calculated from metrics
-            error_rate=0.0,  # Would be calculated from metrics
-            requests_per_minute=0.0,  # Would be calculated from metrics
-            tokens_per_minute=0.0,  # Would be calculated from metrics
-            issues=[],  # Would be populated based on actual issues
-            recommendations=[],  # Would be populated based on analysis
-        )
+        return {
+            "overall_status": overall_status,
+            "providers": status_info,
+            "primary_provider_healthy": primary_healthy,
+            "fallback_available": len(available_providers) > 1,
+            "average_response_time": 0.0,
+            "success_rate": 1.0,
+            "error_rate": 0.0,
+            "requests_per_minute": 0.0,
+            "tokens_per_minute": 0.0,
+            "issues": [],
+            "recommendations": [],
+        }
     except Exception as e:
         logger.error(f"LLM health check failed: {e}")
         raise HTTPException(
@@ -281,7 +277,7 @@ async def llm_request(
 
 @router.get(
     "/usage",
-    response_model=List[LLMUsageStats],
+    # response_model=List[LLMUsageStats],  # TODO: Implement schema
     summary="Get LLM usage statistics",
     description="Get usage statistics for LLM providers.",
 )
@@ -289,7 +285,7 @@ async def get_usage_stats(
     provider: Optional[str] = Query(None, description="Filter by provider"),
     time_period: str = Query("24h", description="Time period (1h, 24h, 7d, 30d)"),
     service: LLMService = Depends(get_llm_service),
-) -> List[LLMUsageStats]:
+) -> list:
     """Get LLM usage statistics."""
     try:
         # This would be implemented to return actual usage stats
@@ -304,14 +300,14 @@ async def get_usage_stats(
 
 @router.get(
     "/templates",
-    response_model=List[LLMPromptTemplate],
+    # response_model=List[LLMPromptTemplate],  # TODO: Implement schema
     summary="Get prompt templates",
     description="Get available LLM prompt templates.",
 )
 async def get_prompt_templates(
     category: Optional[str] = Query(None, description="Filter by category"),
     service: LLMService = Depends(get_llm_service),
-) -> List[LLMPromptTemplate]:
+) -> list:
     """Get prompt templates."""
     try:
         # This would return actual prompt templates

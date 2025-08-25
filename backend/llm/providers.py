@@ -4,9 +4,9 @@ import logging
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
 
-from langchain.schema import BaseLanguageModel
 from langchain_anthropic import ChatAnthropic
 from langchain_community.llms import Ollama
+from langchain_core.language_models import BaseLanguageModel
 from langchain_openai import ChatOpenAI
 
 logger = logging.getLogger(__name__)

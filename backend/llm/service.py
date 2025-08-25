@@ -5,7 +5,7 @@ import logging
 from typing import Any, Dict, List, Optional
 
 from langchain.chains import LLMChain
-from langchain.schema import BaseLanguageModel
+from langchain_core.language_models import BaseLanguageModel
 
 from .prompts import (
     ERROR_DIAGNOSIS_PROMPT,

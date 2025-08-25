@@ -2,9 +2,14 @@
 
 from .deployment import (
     BackupConfig,
+    DeploymentListResponse,
+    DeploymentLogs,
+    DeploymentMetrics,
     DeploymentRequest,
     DeploymentResponse,
     DeploymentSpec,
+    DeploymentStatus,
+    DeploymentUpdateRequest,
     MonitoringConfig,
     NetworkingConfig,
     ResourceRequirements,
@@ -38,13 +43,31 @@ from .requirement import (
     RequirementAnalysisResponse,
     RequirementRefinementRequest,
 )
-from .template import Template, TemplateCategory, TemplateRequest, TemplateResponse
+from .template import (
+    Template,
+    TemplateCategory,
+    TemplateListResponse,
+    TemplateParameter,
+    TemplateRequest,
+    TemplateResource,
+    TemplateResponse,
+    TemplateStatus,
+    TemplateUsageStats,
+    TemplateValidation,
+    TemplateValidationRequest,
+    TemplateValidationResponse,
+)
 
 __all__ = [
     # Deployment schemas
     "DeploymentRequest",
     "DeploymentResponse",
     "DeploymentSpec",
+    "DeploymentStatus",
+    "DeploymentUpdateRequest",
+    "DeploymentListResponse",
+    "DeploymentLogs",
+    "DeploymentMetrics",
     "ResourceRequirements",
     "ScalingConfig",
     "NetworkingConfig",
@@ -53,8 +76,16 @@ __all__ = [
     # Template schemas
     "Template",
     "TemplateCategory",
+    "TemplateListResponse",
+    "TemplateParameter",
     "TemplateRequest",
+    "TemplateResource",
     "TemplateResponse",
+    "TemplateStatus",
+    "TemplateUsageStats",
+    "TemplateValidation",
+    "TemplateValidationRequest",
+    "TemplateValidationResponse",
     # Requirement schemas
     "RequirementAnalysisRequest",
     "RequirementAnalysisResponse",

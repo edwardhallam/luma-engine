@@ -26,8 +26,7 @@ router = APIRouter()
 
 def get_template_service() -> TemplateService:
     """Dependency to get template service instance."""
-    # This will be implemented when we create the service layer
-    raise NotImplementedError("TemplateService not yet implemented")
+    return TemplateService()
 
 
 @router.get(
@@ -207,31 +206,31 @@ async def validate_template(
         )
 
 
-@router.post(
-    "/import",
-    response_model=TemplateResponse,
-    status_code=status.HTTP_201_CREATED,
-    summary="Import template",
-    description="Import a template from a file or URL.",
-)
-async def import_template(
-    file: UploadFile = File(..., description="Template file to import"),
-    service: TemplateService = Depends(get_template_service),
-) -> TemplateResponse:
-    """Import template from file."""
-    try:
-        content = await file.read()
-        template = await service.import_template(content, file.filename)
-        return template
-    except AIDException as e:
-        logger.error(f"Template import failed: {e}")
-        raise HTTPException(status_code=e.status_code, detail=e.message)
-    except Exception as e:
-        logger.error(f"Unexpected error importing template: {e}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Internal server error",
-        )
+# @router.post(
+#     "/import",
+#     response_model=TemplateResponse,
+#     status_code=status.HTTP_201_CREATED,
+#     summary="Import template",
+#     description="Import a template from a file or URL.",
+# )
+# async def import_template(
+#     file: UploadFile = File(..., description="Template file to import"),
+#     service: TemplateService = Depends(get_template_service),
+# ) -> TemplateResponse:
+#     """Import template from file."""
+#     try:
+#         content = await file.read()
+#         template = await service.import_template(content, file.filename)
+#         return template
+#     except AIDException as e:
+#         logger.error(f"Template import failed: {e}")
+#         raise HTTPException(status_code=e.status_code, detail=e.message)
+#     except Exception as e:
+#         logger.error(f"Unexpected error importing template: {e}")
+#         raise HTTPException(
+#             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+#             detail="Internal server error",
+#         )
 
 
 @router.get(
